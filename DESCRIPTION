@@ -1,0 +1,10 @@
+Package: fjolst2
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.0.1
+Date: 2015-07-15
+Author: Höskuldur Björnsson
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: GPL (>= 2)
+LazyData: TRUE

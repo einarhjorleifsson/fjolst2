@@ -1,0 +1,38 @@
+---
+title: "README"
+author: "Einar Hjörleifsson"
+date: "July 15, 2015"
+output: html_document
+---
+
+```
+rm data/all.*.rda
+rm data/*.flk.rda
+rm data/*.stakir.rda
+rm data/stodvar.rda
+rm data/ffiskar.rda
+rm data/fflokkar.rda
+rm data/fhopar.rda
+rm data/fkynthroski.rda
+rm data/flengdir.rda
+rm data/fstaerdir.rda
+rm data/leidr.stodvar.rda
+
+rm man/all.*.Rd
+rm man/*.flk.Rd
+rm man/*.stakir.Rd
+rm man/stodvar.Rd
+rm man/ffiskar.Rd
+rm man/fflokkar.Rd
+rm man/fhopar.Rd
+rm man/fkynthroski.Rd
+rm man/flengdir.Rd
+rm man/fstaerdir.Rd
+rm man/leidr.stodvar.Rd
+```
+
+
+```{r, eval=FALSE}
+library(Rd2roxygen)
+Rd2roxygen("~/r/Pakkar/fjolst2")
+```
