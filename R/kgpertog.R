@@ -29,7 +29,7 @@ kgpertog <- function(sfile,
   }
   nfile$rat <- 1. + nfile$fj.talid/nfile$fj.maelt
   nfile$rat[is.na(nfile$rat)] <- 1.
-  lfile <- fjolst:::join(lfile, nfile[, c("synis.id", "rat")], "synis.id")
+  lfile <- join(lfile, nfile[, c("synis.id", "rat")], "synis.id")
   lfile$wt <- (lfile$fjoldi * lfile$rat * lwcoeff[1.] * lfile$lengd^
                  lwcoeff[2.])/1000.
   if(!missing(minl)) lfile <- lfile[lfile$lengd >= minl,]
@@ -37,6 +37,6 @@ kgpertog <- function(sfile,
 
   tmp <- apply.shrink(lfile$wt, lfile$synis.id, sum)
   names(tmp) <- c("synis.id", name)
-  sfile <- fjolst:::join(sfile, tmp, "synis.id", set = 0.)
+  sfile <- join(sfile, tmp, "synis.id", set = 0.)
   return(sfile)
 }

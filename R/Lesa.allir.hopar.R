@@ -2,6 +2,7 @@
 #' samples.
 #'
 #' @param flokk.id xxx
+#' @param tmptable xxx
 #' @param oracle xxx
 #'
 #' @export

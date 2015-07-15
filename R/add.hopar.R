@@ -10,6 +10,7 @@
 #' @param hopur xxx
 #' @param tmptable xxx
 #' @param oracle xxx
+#' @param hopar.col xxx
 #' @export
 
 add.hopar <- function(faeduhopur,
@@ -19,7 +20,8 @@ add.hopar <- function(faeduhopur,
                       return.on.error=F,
                       hopur=NULL,
                       tmptable=F,
-                      oracle=fjolstOracle){
+                      oracle=fjolstOracle,
+                      hopar.col=hopar.col){
 
 					# 	Baeta seinna vid meltingarstigi o.fl.
   if(is.null(hopur)) {
@@ -27,7 +29,7 @@ add.hopar <- function(faeduhopur,
     ind <- c(1:length(x));ind<- ind[is.na(x)]
     if(length(ind) > 0) {
       x <- col.names(x)
-      txt <- paste("Villa í add.hopar. Dálkur",x,"ekki til")
+      txt <- paste("Villa i add.hopar. Dalkur",x,"ekki til")
       print(txt)
       if(return.on.error) return(invisible())
     }
@@ -143,7 +145,7 @@ add.hopar <- function(faeduhopur,
   outcome <- data.frame(outcome)
   names(outcome) <- txt
 
-  flokkur <- fjolst:::join.data.frame(flokkur,outcome)
+  flokkur <- join.data.frame(flokkur,outcome)
   row.names(flokkur) <- flokkur$flokk.id
   return(flokkur)
 }

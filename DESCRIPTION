@@ -3,6 +3,11 @@ Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.0.1
 Date: 2015-07-15
+Depends:
+  R (>= 2.10)
+Imports:
+  geo,
+  ora
 Author: Höskuldur Björnsson
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)

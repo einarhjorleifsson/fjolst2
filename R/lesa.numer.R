@@ -6,6 +6,8 @@
 #' @param col.names xxx
 #' @param leidrett xxx
 #' @param oracle xxx
+#' @param numer.col xxx
+#' @param numer.col.oracle xxx
 #'
 #' @export
 
@@ -14,7 +16,9 @@ lesa.numer <- function(synis.id,
                        vigt=F,
                        col.names=NULL,
                        leidrett=F,
-                       oracle=fjolstOracle) {
+                       oracle=fjolstOracle,
+                       numer.col = numer.col,
+                       numer.col.oracle = numer.col.oracle) {
   if(!oracle) {
     if(is.null(col.names)) colnames <- c("synis.id","fj.maelt","fj.talid")
     if(!is.null(synis.id))

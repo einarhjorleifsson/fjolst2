@@ -10,7 +10,7 @@
 fjperstod <- function(data,
                       tegund,
                       name = "fjoldi",
-                      oracle=Oracle)
+                      oracle = fjolstOracle)
 {
   tmp <- lesa.numer(data$synis.id, tegund,oracle=oracle)
   i <- is.na(tmp$fj.talid)
@@ -22,6 +22,6 @@ fjperstod <- function(data,
   tmp$fjoldi <- tmp$fj.maelt + tmp$fj.talid
   x <- apply.shrink(tmp$fjoldi, tmp$synis.id, sum, names = c("synis.id",
                                                              name))
-  data <- fjolst:::join(data, x, "synis.id", set = 0)
+  data <- join(data, x, "synis.id", set = 0)
   return(data)
 }

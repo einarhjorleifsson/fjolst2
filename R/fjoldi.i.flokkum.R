@@ -6,6 +6,7 @@
 #' @param lengdir xxx
 #' @param numer xxx
 #' @param lenfl xxx
+#' @param oracle xxx
 #'
 #' @export
 
@@ -14,15 +15,15 @@ fjoldi.i.flokkum  <- function(flokkur,
                               option=1,
                               lengdir,
                               numer,
-                              lenfl=old.stomach.breaks$breaks,
-                              oracle=fjolstOracle) {
+                              lenfl = old.stomach.breaks$breaks,
+                              oracle = fjolstOracle) {
   synis.id <- unique(flokkur$synis.id)
-  if(missing(lengdir)) lengdir <- lesa.lengdir(synis.id,teg,oracle=oracle)
+  if(missing(lengdir)) lengdir <- lesa.lengdir(synis.id,teg,oracle=fjolstOracle)
   if(length(lengdir)==0) return(flokkur)
-  if(missing(numer)) numer <- lesa.numer(synis.id,teg,oracle=oracle)
+  if(missing(numer)) numer <- lesa.numer(synis.id,teg,oracle=fjolstOracle)
   numer$rat <- (numer$fj.maelt+numer$fj.talid)/numer$fj.maelt
   numer$rat[is.na(numer$rat)] <- 0
-  lengdir <- fjolst:::join(lengdir,numer,"synis.id")
+  lengdir <- join(lengdir,numer,"synis.id")
   lengdir$fjoldi <- lengdir$fjoldi*lengdir$rat
   flokkur$fjoldi <- rep(-999999,nrow(flokkur)) # var na en vandræði
   if(option==1) {

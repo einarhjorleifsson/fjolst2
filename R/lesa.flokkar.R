@@ -7,6 +7,7 @@
 #' @param total xxx
 #' @param flokk.id xxx
 #' @param oracle xxx
+#' @param old.stomach.breaks xxx
 #'
 #' @export
 
@@ -16,7 +17,8 @@ lesa.flokkar <- function (ranfiskur,
                           fjoldi = T,
                           total = T,
                           flokk.id = NULL,
-                          oracle = fjolstOracle)
+                          oracle = fjolstOracle,
+                          old.stomach.breaks=old.stomach.breaks)
 {
   if (!oracle) {
     result <- fflokkar[, c("synis.id", "flokk.id", "ranfiskur",
@@ -44,7 +46,7 @@ lesa.flokkar <- function (ranfiskur,
       else tmp <- fhopar
       x <- apply.shrink(tmp$thyngd, tmp$flokk.id, sum,
                         names = c("flokk.id", "total"))
-      result <- fjolst:::join(result, x, "flokk.id", set = 0)
+      result <- join(result, x, "flokk.id", set = 0)
     }
     cat("start fjoldi")
     if (fjoldi) {
@@ -61,7 +63,7 @@ lesa.flokkar <- function (ranfiskur,
       result$index <- paste(result$synis.id, result$lenfl)
       tmp <- tmp[!is.na(match(tmp$index, result$index)),
                  ]
-      result <- fjolst:::join(result, tmp[, c("index", "fjoldi")],
+      result <- join(result, tmp[, c("index", "fjoldi")],
                               "index", set = 0)
       j <- match("index", names(result))
       result <- result[, -j]
@@ -102,7 +104,7 @@ lesa.flokkar <- function (ranfiskur,
     skipun <- paste("select sum(NVL(thyngd,0)) total,flokk_id from",
                     table)
     y <- run.sqlskipun(skipun, x$flokk.id, "flokk_id", "where", "group by flokk_id")
-    x <- fjolst:::join(x, y, "flokk.id", set = 0)
+    x <- join(x, y, "flokk.id", set = 0)
   }
   row.names(x) <- x$flokk.id
   print("fjoldi")

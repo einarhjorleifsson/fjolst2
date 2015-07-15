@@ -1,13 +1,16 @@
+#' fjolstOracle
+#'
+#' @name fjolstOracle
+#' @docType data
+#' @format Boolean, default FALSE
+"fjolstOracle"
+
 #' List of prey
 #'
 #' List of prey in Icelandic, english and latin
 #'
 #' @name allir.hopar
 #' @docType data
-#' @format A data frame with 1246 observations on the following 4 variables.
-#' \describe{ \item{list("isl.heiti")}{a character vector}
-#' \item{list("faeduhopur")}{a character vector} \item{list("flokkur")}{a
-#' numeric vector} \item{list("tegund")}{a numeric vector} }
 NULL
 
 #' List of all food items in the faeda database
@@ -17,12 +20,6 @@ NULL
 #'
 #' @name faeduhopar
 #' @docType data
-#' @format A data frame with 1244 observations on the following 6 variables.
-#' \describe{ \item{list("faeduhopur")}{a character vector}
-#' \item{list("lat.heiti")}{a character vector} \item{list("isl.heiti")}{a
-#' character vector} \item{list("okp.numer")}{a numeric vector}
-#' \item{list("flokkur")}{a numeric vector} \item{list("tegund")}{a numeric
-#' vector} }
 NULL
 
 #' Selected columns from the table f_flokkar.
@@ -96,9 +93,6 @@ NULL
 #'
 #' @name old.stomach.breaks
 #' @docType data
-#' @format The format is: List of 2 $ breaks: num [1:16] 4.5 6.5 9.5 14.5 19.5
-#' 24.5 29.5 39.5 49.5 59.5 ...  $ meanl : num [1:15] 5.5 8 12 17 22 27 34.5
-#' 44.5 54.5 64.5 ...
 #'
 NULL
 

@@ -7,6 +7,9 @@
 #' @param reitur xxx
 #' @param leidangur xxx
 #' @param synis.id xxx
+#' @param stodvar.col xxx
+#' @param stodvar.col.oracle xxx
+#' @param stodvar.col.splus xxx
 #'
 #' @export
 
@@ -16,14 +19,17 @@ lesa.leidr.stodvar <- function(col.names=stodvar.col,
                                man=NULL,
                                reitur=NULL,
                                leidangur=NULL,
-                               synis.id=NULL) {
+                               synis.id=NULL,
+                               stodvar.col = stodvar.col,
+                               stodvar.col.oracle = stodvar.col.oracle,
+                               stodvar.col.splus = stodvar.col.splus) {
   if(!is.null(veidarfaeri)){
     veidarfaeri <- paste(veidarfaeri,collapse=",")
   }
   x <- match(col.names,stodvar.col)
   ind <- c(1:length(x));ind<- ind[is.na(x)]
   if(length(ind) > 0) {
-    txt <- paste("Villa í lesa.stodvar. Dálkar",col.names[ind],"ekki til")
+    txt <- paste("Villa i lesa.stodvar. Dalkar",col.names[ind],"ekki til")
     print(txt)
     return(invisible())
   }

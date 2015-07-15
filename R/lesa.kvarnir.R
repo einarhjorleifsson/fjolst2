@@ -13,6 +13,8 @@
 #' @param lengd xxx
 #' @param leidrett xxx
 #' @param oracle xxx
+#' @param kvarnir.col xxx
+#' @param kvarnir.col.oracle xxx
 #'
 #' @export
 
@@ -28,11 +30,13 @@ lesa.kvarnir <- function(synis.id,
                          kynfaeri=F,
                          lengd=NULL,
                          leidrett=F,
-                         oracle=fjolstOracle) {
+                         oracle=fjolstOracle,
+                         kvarnir.col=kvarnir.col,
+                         kvarnir.col.oracle = kvarnir.col.oracle) {
   col.names=unique(c("synis.id","lengd","aldur",col.names))
   if(!oracle) {
-    if(!exists("all.kv"))
-      attach(paste(fjolstlib,"/ExtraStuff/all.kv.rda",sep=""))
+    #if(!exists("all.kv"))
+    #  attach(paste(fjolstlib,"/ExtraStuff/all.kv.rda",sep=""))
     if(is.data.frame(all.kv)){
       if(!is.null(synis.id))
         kv <- all.kv[all.kv$tegund %in% teg & all.kv$synis.id %in% synis.id ,col.names]

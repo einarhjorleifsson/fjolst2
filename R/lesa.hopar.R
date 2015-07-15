@@ -48,7 +48,7 @@ lesa.hopar <- function(faeduhopur,
     ind <- c(1:length(x));ind<- ind[is.na(x)]
     if(length(ind) > 0) {
       x <- col.names(x)
-      txt <- paste("Villa í lesa.hopar. Dálkar",x,"ekki til")
+      txt <- paste("Villa i lesa.hopar. Dalkar",x,"ekki til")
       print(txt)
       return(invisible())
     }

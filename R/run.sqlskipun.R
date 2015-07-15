@@ -3,8 +3,6 @@
 #' @param skipun xxx
 #' @param listi xxx
 #' @param colname xxx
-#' @param tmpskipanaskra xxx
-#' @param tmpskra xxx
 #' @param txt1 xxx
 #' @param txt2 xxx
 #'

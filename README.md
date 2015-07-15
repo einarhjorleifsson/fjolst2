@@ -1,11 +1,6 @@
----
-title: "README"
-author: "Einar Hjörleifsson"
-date: "July 15, 2015"
-output: 
-  html_document: 
-    keep_md: yes
----
+# README
+Einar Hjörleifsson  
+July 15, 2015  
 
 ```
 rm data/all.*.rda
@@ -34,7 +29,8 @@ rm man/leidr.stodvar.Rd
 ```
 
 
-```{r, eval=FALSE}
+
+```r
 library(Rd2roxygen)
 Rd2roxygen("~/r/Pakkar/fjolst2")
 ```
