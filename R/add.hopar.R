@@ -1,7 +1,27 @@
-add.hopar <-
-function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=NULL,tmptable=F,oracle=fjolstOracle){
-  
-					# 	Baeta seinna vid meltingarstigi o.fl.  
+#' Add prey information to a dataframe
+#'
+#' Add prey information to a dataframe
+#'
+#' @param faeduhopur xxx
+#' @param flokkur xxx
+#' @param col.names xxx
+#' @param isl xxx
+#' @param return.on.error xxx
+#' @param hopur xxx
+#' @param tmptable xxx
+#' @param oracle xxx
+#' @export
+
+add.hopar <- function(faeduhopur,
+                      flokkur,
+                      col.names=c("thyngd"),
+                      isl=F,
+                      return.on.error=F,
+                      hopur=NULL,
+                      tmptable=F,
+                      oracle=fjolstOracle){
+
+					# 	Baeta seinna vid meltingarstigi o.fl.
   if(is.null(hopur)) {
     x <- match(col.names,hopar.col)
     ind <- c(1:length(x));ind<- ind[is.na(x)]
@@ -10,12 +30,12 @@ function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=
       txt <- paste("Villa í add.hopar. Dálkur",x,"ekki til")
       print(txt)
       if(return.on.error) return(invisible())
-    }	
-    
+    }
+
     x <- lesa.hopar(faeduhopur,flokkur$flokk.id,col.names=col.names,tmptable=tmptable,oracle=oracle)
   }
   else {
-    x <- hopur 
+    x <- hopur
     faeduhopur <- unique(x$faeduhopur)
     i <- match("thyngd",names(x))
     i1 <- match("fjoldi",names(x))
@@ -51,11 +71,11 @@ function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=
   x <- x[ind1,] # adeins tau sem passa vid flokk
   ind <- ind[!is.na(ind)]
   rownr <- ind
-  
-					# 	finnar dalknr.  
-  
+
+					# 	finnar dalknr.
+
   ind1 <- match(x$faeduhopur,faeduhopur)
-  
+
   if(!is.na(match("melt",col.names))) {
     ind2 <- x$melt;ind2[is.na(ind2)] <- 3
     ind <- match(c("thyngd","fjoldi"),col.names)
@@ -69,9 +89,9 @@ function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=
     }
     else if(!is.na(ind[1])) # bara thyngd
     outcome <- fill.matrix(outcome,x$thyngd,rownr,dalknr)
-    else if(!is.na(ind[2]))			
+    else if(!is.na(ind[2]))
       outcome <- fill.matrix(outcome,x$fjoldi,rownr,dalknr)
-    
+
   }
   else { # ekki meltingarstig
     ind <- match(c("thyngd","fjoldi"),col.names)
@@ -79,13 +99,13 @@ function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=
     dalknr <- l*(ind1-1)+1
     dalk.pr.tegund <- l
     outcome <- matrix(0,nrow(flokkur),length(faeduhopur)*dalk.pr.tegund)
-    if(l == 2) { # baedi thyngd og fjoldi 
+    if(l == 2) { # baedi thyngd og fjoldi
       outcome <- fill.matrix(outcome,x$thyngd,rownr,dalknr)
       outcome <- fill.matrix(outcome,x$fjoldi,rownr,dalknr+1)
     }
     else if(!is.na(ind[1])) # bara thyngd
     outcome <- fill.matrix(outcome,x$thyngd,rownr,dalknr)
-    else if(!is.na(ind[2]))			
+    else if(!is.na(ind[2]))
       outcome <- fill.matrix(outcome,x$fjoldi,rownr,dalknr)
   }
   if(!is.na(match("melt",col.names))){
@@ -98,11 +118,11 @@ function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=
 	cnr <- cnr+1
       outcome <- dalk.sum(outcome,cnr[1],cnr[2:4])
     }
-  }		
-  
-  
+  }
+
+
 					#	Finna dalkanofn
-  
+
   if(!is.na(match("melt",col.names))) {
     ind <- match(c("thyngd","fjoldi"),col.names)
     meltext <- c(".0",".fj.0",".1",".fj.1",".2",".fj.2","",".fj")
@@ -119,11 +139,11 @@ function(faeduhopur,flokkur,col.names=c("thyngd"),isl=F,return.on.error=F,hopur=
   txt <- c(t(matrix(faeduhopur,length(faeduhopur),length(meltext))))
   txt1 <- rep(meltext,length(faeduhopur))
   txt <- paste(txt,txt1,sep="")
-  
+
   outcome <- data.frame(outcome)
   names(outcome) <- txt
-  
-  flokkur <- fjolst:::join.data.frame(flokkur,outcome) 
+
+  flokkur <- fjolst:::join.data.frame(flokkur,outcome)
   row.names(flokkur) <- flokkur$flokk.id
   return(flokkur)
 }

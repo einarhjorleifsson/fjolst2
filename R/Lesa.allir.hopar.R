@@ -1,5 +1,14 @@
-Lesa.allir.hopar <-
-function(flokk.id,tmptable=F,oracle=fjolstOracle) {
+#' Read all records from the table f_hopar corresponding to the selected
+#' samples.
+#'
+#' @param flokk.id xxx
+#' @param oracle xxx
+#'
+#' @export
+
+Lesa.allir.hopar <- function(flokk.id,
+                             tmptable=F,
+                             oracle=fjolstOracle) {
   result <- NULL
   if(!oracle) {
     if(!is.null(flokk.id)) result <- fhopar[!is.na(match(fhopar$flokk.id,flokk.id)),]
@@ -9,8 +18,8 @@ function(flokk.id,tmptable=F,oracle=fjolstOracle) {
     names(x)[3:4] <- c("thyngd","fjoldi")
     x$faeduhopur <- as.character(x$faeduhopur)
     return(x)
-  }  
-  
+  }
+
   flokk.id <- sort(flokk.id)
   if(tmptable)
     skipun <-  "select flokk_id,sum(NVL(thyngd,0)) thyngd,sum(NVL(fjoldi,0)) fjoldi,faeduhopur from faeda.f_hopar_tmp "

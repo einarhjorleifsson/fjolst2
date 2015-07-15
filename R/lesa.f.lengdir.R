@@ -1,5 +1,26 @@
-lesa.f.lengdir <-
-function(synis.id=NULL,ranfiskur,lenfl=NULL,faeduhopur,table="f_lengdir",haed=F,kyn=F,faerslunumer=T,oracle=fjolstOracle){
+#' Read all length measurement of selected prey in selected predator at given
+#' stations.
+#'
+#' @param synis.id xxx
+#' @param ranfiskur xxx
+#' @param lenfl xxx
+#' @param faeduhopur xxx
+#' @param table xxx
+#' @param haed xxx
+#' @param kyn xxx
+#' @param faerslunumer xxx
+#' @param oracle xxx
+#'
+#' @export
+
+lesa.f.lengdir <- function(synis.id=NULL,
+                           ranfiskur,
+                           lenfl=NULL,
+                           faeduhopur,table="f_lengdir",
+                           haed=F,
+                           kyn=F,
+                           faerslunumer=T,
+                           oracle=fjolstOracle){
   if(!oracle) {
     if(table=="f_lengdir")result <- flengdir
     if(table=="f_staerdir")result <- fstaerdir
@@ -8,7 +29,7 @@ function(synis.id=NULL,ranfiskur,lenfl=NULL,faeduhopur,table="f_lengdir",haed=F,
     result <- result[!is.na(match(result$faeduhopur,faeduhopur)),]
     if(!is.null(synis.id))
       result <- result[!is.na(match(result$synis.id,synis.id)),]
-    i <- match("brad.lengd",names(result)) 
+    i <- match("brad.lengd",names(result))
     if(!is.na(i)) names(result)[i] <- "lengd"
     return(result)
   }
@@ -16,9 +37,9 @@ function(synis.id=NULL,ranfiskur,lenfl=NULL,faeduhopur,table="f_lengdir",haed=F,
 
 
 
-  if(!is.null(synis.id)) 
+  if(!is.null(synis.id))
     synis.id <- sort(unique(synis.id))
-  
+
 
   if(table=="f_lengdir")dalkur<-"len_fl"
   else dalkur<-"lengd_rf"
@@ -34,11 +55,11 @@ function(synis.id=NULL,ranfiskur,lenfl=NULL,faeduhopur,table="f_lengdir",haed=F,
   else if(!is.na(match(table,c("f_kynthroski","f_kynthroski_tmp")))) {
     nafn <- c("synis.id","ranfiskur","lengd.rf","brad.lengd","brad.thyngd","brad.kyn","brad.kynthroski")
     nafn1 <- c("synis_id","ranfiskur","lengd_rf","brad_lengd","brad_thyngd","brad_kyn","brad_kynth")
-  }    
+  }
 
   if(haed) { nafn <- c(nafn,"haed");nafn1 <- c(nafn1,"haed") }
   if(kyn){
-    if(table=="f_kynthroski"){ 
+    if(table=="f_kynthroski"){
       nafn <- c(nafn,c("brad.kyn","brad.kynth"))
       nafn1 <- c(nafn1,c("brad_kyn","brad_kynth"))
     }
@@ -49,8 +70,8 @@ function(synis.id=NULL,ranfiskur,lenfl=NULL,faeduhopur,table="f_lengdir",haed=F,
   }
   if(faerslunumer){ nafn<-c(nafn,"faerslunumer");nafn1 <- c(nafn1,"faerslunumer")}
   if(length(grep("faeda",table)) == 0)
-     table <- paste("faeda",table,sep=".")
-    
+    table <- paste("faeda",table,sep=".")
+
   txt1 <- paste(nafn1,collapse=",")
   rf <- paste(ranfiskur,collapse=",")
   lf <- paste(lenfl,collapse=",")
@@ -64,10 +85,10 @@ function(synis.id=NULL,ranfiskur,lenfl=NULL,faeduhopur,table="f_lengdir",haed=F,
   fh <- paste(faeduhopur,collapse="','")
   fh <- paste("'",fh,"'",sep="")
   skipun <- paste("select",txt1,"from",table,"where ranfiskur in (",rf,") and faeduhopur in (",fh,")")
-  if(!is.null(lenfl)) 
+  if(!is.null(lenfl))
     skipun <- paste(skipun,"and",dalkur,"in (",paste(lenfl,collapse=","),")")
   x <- run.sqlskipun(skipun,synis.id,"synis_id")
-  
+
   return(x)
-  
+
 }

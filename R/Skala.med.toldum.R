@@ -1,5 +1,14 @@
-Skala.med.toldum <-
-function(lengdir,numer,tegund) {
+#' Scale length measurements by number counted.
+#'
+#' @param lengdir xxx
+#' @param numer xxx
+#' @param tegund xxx
+#'
+#' @export
+
+Skala.med.toldum <- function(lengdir,
+                             numer,
+                             tegund) {
   if(missing(numer))
     numer <- lesa.numer(synis.id=unique(lengdir$synis.id),tegund=tegund)
   numer$rat <- 1 + numer$fj.talid/numer$fj.maelt
